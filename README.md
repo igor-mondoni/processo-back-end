@@ -1,4 +1,4 @@
-npm install
-npx sequelize-cli db:create
-npx sequelize db:migrate
-npm run dev
+<p>npm install</p>
+<p>npx sequelize-cli db:create</p>
+<p>npx sequelize db:migrate</p>
+<p>npm run dev</p>
