@@ -22,7 +22,7 @@ module.exports = {
       timestamps: true,
     },
   };
-
+<p/>
 <p>Abra o console após fazer o clone e execute os seguintes comandos:</p>
 <p>npm install</p>
 <p>npx sequelize-cli db:create</p>
