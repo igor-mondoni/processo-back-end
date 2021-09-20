@@ -23,7 +23,9 @@ module.exports = {
     },
   };
 <p/>
-<p>Abra o console após fazer o clone e execute os seguintes comandos:</p>
+<p>Abra o console e execute os seguintes comandos:</p>
+<p>git clone https://github.com/igor-mondoni/processo-back-end.git</p>
+<p>cd processo-back-end</p>
 <p>npm install</p>
 <p>npx sequelize-cli db:create</p>
 <p>npx sequelize db:migrate</p>
