@@ -2,12 +2,13 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('tb_people', { 
+    return queryInterface.createTable('tb_people', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
+        unique: true
       },
       name: {
         type: Sequelize.STRING,
@@ -20,6 +21,7 @@ module.exports = {
       doc_number: {
         type: Sequelize.STRING,
         allowNull: true,
+        unique: true
       },
       nationality: {
         type: Sequelize.STRING,
@@ -57,13 +59,13 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: true,
-      },
-    });
-  },
+      }
+    },)
 
-  down: async (queryInterface, Sequelize) => {
-    
-     await queryInterface.dropTable('tb_people');
- 
+    down: async (queryInterface, Sequelize) => {
+
+      await queryInterface.dropTable('tb_people');
+
+    }
   }
 };

@@ -10,22 +10,55 @@ module.exports = {
     async store(req, res) {
         const { id } = req.params;
         const { name, surname, email, zip_code, state, city, street, doc_number, cellphone, nationality } = req.body;
-        let cpf = doc_number;
-        cpf = cpf.replace(/[^\d]/g, "");
-        cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-        // if(id){
 
-        // }else{
-        const pessoas = await Pessoas.create({ name, surname, email, zip_code, state, city, street, cpf, cellphone, nationality });
-        // }
-        return res.json(pessoas)
+        let pessoas = ""
+        if (id) {
+            Pessoas.update(
+                {
+                    'name': name,
+                    'surname': surname,
+                    'email': email,
+                    'zip_code': zip_code,
+                    'state': state,
+                    'city': city,
+                    'street': street,
+                    'doc_number': doc_number,
+                    'cellphone': cellphone,
+                    'nationality': nationality
+                },
+                { where: { id: id } }
+            );
+        } else {
+            try {
+                const pessoas = await Pessoas.create({
+                    'name': name,
+                    'surname': surname,
+                    'email': email,
+                    'zip_code': zip_code,
+                    'state': state,
+                    'city': city,
+                    'street': street,
+                    'doc_number': doc_number,
+                    'cellphone': cellphone,
+                    'nationality': nationality
+                });
+            } catch (error) {
+                if (error.name === "SequelizeUniqueConstraintError") {
+                    return res.json("CPF já existe")
+                } else {
+                    return res.json(error);
+                }
+            }
+
+        }
+        return res.json(pessoas);
     },
 
     async show(req, res) {
 
         const { id } = req.params;
 
-        const pessoas = await Pessoas.findByPk(id)
+        const pessoas = await Pessoas.findByPk(id);
 
         return res.json(pessoas);
     },
@@ -37,7 +70,7 @@ module.exports = {
             where: {
                 id: id
             }
-        })
+        });
         return res.json('ok');
     }
 };
